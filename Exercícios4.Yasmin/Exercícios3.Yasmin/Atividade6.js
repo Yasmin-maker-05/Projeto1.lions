@@ -1,26 +1,37 @@
-const prompt = require('prompt-sync')();
+const prompt = require("prompt-sync")();
 
-let MonitoramentoTurbina = {
-    Posição: ['Motor direito'],
-    StatusFuncionamento: true,
-    TemperaturaCelsius: [],
-    PSI: [],
-    CombustívelPorcentagem: []
-}
+const carrinhos = [
+    { cliente: "João", produtos: [50.0, 120.5, 15.0] },
+    { cliente: "Maria", produtos: [200.0, 45.9] },
+    { cliente: "Carlos", produtos: [10.0, 5.5, 32.0, 8.0] }
+];
 
-let TemperaturaAtual = Number(prompt("Qual a temperatura atual da Turbina? "))
-MonitoramentoTurbina.TemperaturaCelsius.push(TemperaturaAtual)
+let clientesPagos = [];
 
-let PressãoPSI = Number(prompt("Qual a pressão atual do PSI? "))
-MonitoramentoTurbina.PSI.push(PressãoPSI)
+carrinhos.forEach((carrinho) => {
 
-let Combustível = Number(prompt("Qual a porentagem atual do combustível? "))
-MonitoramentoTurbina.CombustívelPorcentagem.push(Combustível)
+    let total = 0;
 
-if (MonitoramentoTurbina.CombustívelPorcentagem > 20 && MonitoramentoTurbina.PSI > 50 && MonitoramentoTurbina.TemperaturaCelsius > 20 && MonitoramentoTurbina.TemperaturaCelsius < 90) {
-    console.log(MonitoramentoTurbina)
-} else {
-    console.log("Falha Crítica")
-    MonitoramentoTurbina.StatusFuncionamento = ! MonitoramentoTurbina.StatusFuncionamento
-    console.log(MonitoramentoTurbina)
-}
+    carrinho.produtos.forEach((valor) => {
+        total += valor;
+    });
+
+    console.log("Cliente:", carrinho.cliente);
+    console.log("Total:", total);
+
+    let pago = 0;
+
+    while (pago < total) {
+        let valor = Number(prompt("Digite o valor recebido: "));
+        pago += valor;
+    }
+
+    if (pago > total) {
+        console.log("Troco:", pago - total);
+    }
+
+    clientesPagos.push(carrinho.cliente);
+});
+
+console.log("Pagamentos concluídos:");
+console.log(clientesPagos);

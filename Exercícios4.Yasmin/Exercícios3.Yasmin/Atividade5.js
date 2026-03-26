@@ -1,23 +1,19 @@
-const prompt = require('prompt-sync')();
+const prompt = require("prompt-sync")();
 
-let FichaProjeto = {
-    Coordenador: ['Pedro'],
-    limiteVagas: [3],
-    áreaEstudo: ['Tecnologia'],
-}
-let Mentores = {
-    Nome: ['Carlos', 'Marcos'],
-    areaAtuacao: ['Marketing']
-}
- let NovoUsuario = prompt("Qual seu nome? ")
- let AreaAtu = prompt("Qual sua área de atuação? (ex: Tecnologia, Artes, Linguística) ")
+let pesoTotal = 0;
+let caixas = 0;
 
-  if (FichaProjeto.limiteVagas.length < 3 && AreaAtu == 'Tecnologia') {
-    console.log("Inscrição aceita")
-    Mentores.Nome.push(NovoUsuario)
-    console.log(FichaProjeto)
-    console.log(Mentores)
-  } else {
-    console.log("Bloqueado para Inscrições")
-    console.log(FichaProjeto)
-  }
+while (true) {
+    let peso = Number(prompt("Digite o peso da caixa: "));
+
+    if (pesoTotal + peso > 1000) {
+        console.log("Carga máxima atingida!");
+        break;
+    }
+
+    pesoTotal += peso;
+    caixas++;
+}
+
+console.log("Peso total:", pesoTotal);
+console.log("Caixas carregadas:", caixas);
